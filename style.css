@@ -1,6 +1,3 @@
-/* c:\Users\Irsyad\Documents\Websitos\style.css */
-
-/* Pastikan font sudah terpasang sesuai gambar */
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 * {
@@ -17,61 +14,51 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow-x: hidden; /* Mencegah scroll horizontal */
-    padding: 20px; /* Memberi jarak aman di layar kecil */
+    overflow-x: hidden;
+    padding: 20px;
 }
 
 .container {
     width: 100%;
-    max-width: 95vw; /* Menggunakan 95% lebar layar agar kartu terlihat lebih besar */
+    max-width: 95vw;
     position: relative;
-    z-index: 1; /* Memastikan container menjadi konteks tumpukan */
+    z-index: 1;
 }
 
-/* --- BACKGROUND CUSTOM IMAGE --- */
 .container::before {
     content: '';
     position: absolute;
-    z-index: -1; /* Posisi di belakang kartu */
-    
-    /* Ganti 'desain-kamu.png' dengan nama file gambar dari Photoshop */
+    z-index: -1;
     background-image: url('desain-kamu.png'); 
-    background-size: contain; /* 'contain' agar gambar utuh, 'cover' untuk memenuhi area */
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    
-    /* Mengatur ukuran dan posisi gambar di belakang card */
     width: 120%; 
     height: 120%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    opacity: 0.8; /* Sesuaikan transparansi agar tidak terlalu dominan */
+    opacity: 0.8;
 }
 
 .card {
-    background-color: rgba(10, 10, 10, 0.6); /* Transparan agar background terlihat */
-    backdrop-filter: blur(20px); /* Efek Glassmorphism (buram) */
-    -webkit-backdrop-filter: blur(20px); /* Support Safari */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Border default redup */
+    background-color: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     position: relative;
     width: 100%;
-    min-height: 85vh; /* Agar kartu lebih tinggi dan tidak gepeng */
-    overflow: hidden; /* Menjaga glow tetap di dalam kurva border */
+    min-height: 85vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-/* --- GLOW EFFECT LOGIC --- */
-
-/* 1. Inner Spotlight (Cahaya di dalam kartu) */
 .card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    /* Menggunakan gradient yang mengikuti posisi kursor via variabel CSS */
     background: radial-gradient(
         800px circle at var(--card-x, 50%) var(--card-y, 50%), 
         rgba(255, 255, 255, 0.04), 
@@ -83,20 +70,17 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* 2. Border Glow (Stroke yang menyala) */
 .card::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 16px; /* Samakan dengan border-radius card */
-    padding: 1px; /* Ketebalan stroke */
-    /* Gradient lebih terang untuk stroke */
+    border-radius: 16px;
+    padding: 1px;
     background: radial-gradient(
         600px circle at var(--card-x, 50%) var(--card-y, 50%), 
         rgba(255, 255, 255, 0.4), 
         transparent 40%
     );
-    /* Teknik masking untuk hanya menampilkan border */
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
@@ -108,39 +92,38 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* Tampilkan glow saat hover */
 .card:hover::before,
 .card:hover::after {
     opacity: 1;
 }
 
 .card-header {
-    height: 120px; /* Diperbesar agar proporsional dengan kartu yang besar */
+    height: 120px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.01);
     display: flex;
-    align-items: center; /* Posisi vertikal di tengah header */
-    padding: 0 clamp(2rem, 6vw, 6rem); /* Padding kiri-kanan mengikuti body agar sejajar */
+    align-items: center;
+    padding: 0 clamp(2rem, 6vw, 6rem);
 }
 
 .header-copyright {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.4); /* Warna redup agar elegan */
+    color: rgba(255, 255, 255, 0.4);
     font-weight: 400;
     letter-spacing: 1px;
 }
 
 .card-body {
-    padding: clamp(3rem, 10vh, 8rem) clamp(2rem, 6vw, 6rem); /* Padding diperbesar agar lebih lega */
+    padding: clamp(3rem, 10vh, 8rem) clamp(2rem, 6vw, 6rem);
     position: relative;
-    z-index: 3; /* Konten di atas glow */
+    z-index: 3;
     display: flex;
     flex-direction: column;
-    flex: 1; /* Mengisi sisa ruang vertikal kartu */
+    flex: 1;
 }
 
 .name {
-    font-size: clamp(2rem, 5vw, 4.5rem); /* Ukuran teks responsif */
+    font-size: clamp(2rem, 5vw, 4.5rem);
     font-weight: 700;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
@@ -151,18 +134,17 @@ body {
     font-size: clamp(1rem, 1.2vw, 1.125rem);
     font-weight: 400;
     line-height: 1.7;
-    color: #a1a1a1; /* Warna teks sedikit abu agar tidak terlalu silau */
-    max-width: 800px; /* Membatasi lebar teks agar tetap nyaman dibaca meski kartu lebar */
+    color: #a1a1a1;
+    max-width: 800px;
     margin-bottom: 4rem;
     word-wrap: break-word;
 }
 
-/* --- SKILL TAGS & POPUP --- */
 .skill-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 2rem; /* Jarak sebelum tombol sosial media */
+    margin-bottom: 2rem;
 }
 
 .skill-tag {
@@ -170,7 +152,7 @@ body {
     padding: 10px 24px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px; /* Bentuk kapsul */
+    border-radius: 50px;
     color: #fff;
     font-size: 0.9rem;
     font-weight: 700;
@@ -184,42 +166,40 @@ body {
     transform: translateY(-2px);
 }
 
-/* Popup Window (Hidden by default) */
 .skill-popup {
     position: absolute;
-    top: 140%; /* Posisi awal di bawah tag */
+    top: 140%;
     left: 50%;
     transform: translateX(-50%);
     width: 280px;
-    background: rgba(15, 15, 15, 0.95); /* Background gelap solid */
+    background: rgba(15, 15, 15, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 12px;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Animasi bounce halus */
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     pointer-events: none;
     z-index: 10;
     box-shadow: 0 10px 40px rgba(0,0,0,0.6);
     text-align: left;
 }
 
-/* Panah kecil di bawah popup */
 .skill-popup::after {
     content: '';
     position: absolute;
-    bottom: 100%; /* Panah dipindah ke atas popup */
+    bottom: 100%;
     left: 50%;
     margin-left: -8px;
     border-width: 8px;
     border-style: solid;
-    border-color: transparent transparent rgba(15, 15, 15, 0.95) transparent; /* Panah menghadap ke atas */
+    border-color: transparent transparent rgba(15, 15, 15, 0.95) transparent;
 }
 
 .skill-tag:hover .skill-popup {
     opacity: 1;
     visibility: visible;
-    top: 125%; /* Posisi akhir saat muncul (sedikit naik) */
+    top: 125%;
 }
 
 .skill-popup h3 {
@@ -240,7 +220,7 @@ body {
     justify-content: flex-end;
     gap: 16px;
     margin-top: auto;
-    flex-wrap: wrap; /* Agar tombol turun ke bawah jika layar sempit */
+    flex-wrap: wrap;
 }
 
 .social-item {
@@ -260,13 +240,12 @@ body {
     overflow: hidden;
 }
 
-/* Glow Effect untuk Tombol (Stroke Menyala) */
 .social-item::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: 50px;
-    padding: 1px; /* Ketebalan stroke tombol */
+    padding: 1px;
     background: radial-gradient(
         100px circle at var(--x, 50%) var(--y, 50%), 
         rgba(255, 255, 255, 0.8), 
@@ -291,12 +270,10 @@ body {
     transform: translateY(-2px);
 }
 
-/* Transisi halus untuk perubahan warna ikon */
 .social-item i {
     transition: all 0.3s ease;
 }
 
-/* Custom Glow Colors per Brand */
 .social-item.instagram::before {
     background: radial-gradient(
         120px circle at var(--x, 50%) var(--y, 50%), 
@@ -326,32 +303,25 @@ body {
     );
 }
 
-/* --- ICON COLORS ON HOVER --- */
-
-/* Instagram Gradient Icon */
 .social-item.instagram:hover i {
     background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf);
-    -webkit-background-clip: text; /* Memotong background sesuai bentuk ikon */
-    -webkit-text-fill-color: transparent; /* Membuat isi ikon transparan agar background terlihat */
-    display: inline-block; /* Diperlukan agar teknik gradient text bekerja sempurna */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
-/* LinkedIn Blue Icon */
 .social-item.linkedin:hover i {
     color: #0077b5;
 }
 
-/* Behance Blue Icon */
 .social-item.behance:hover i {
     color: #1769ff;
 }
 
-/* GitHub White Icon */
 .social-item.github:hover i {
     color: #ffffff;
 }
 
-/* Media Query untuk Layar Kecil (HP) */
 @media (max-width: 768px) {
     .card-body {
         padding: 2rem;
@@ -367,6 +337,6 @@ body {
     }
     
     .social-item {
-        width: 100%; /* Tombol full width di HP */
+        width: 100%;
     }
 }
